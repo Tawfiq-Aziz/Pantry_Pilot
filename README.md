@@ -4,103 +4,125 @@ A modern kitchen and grocery management platform built with **Laravel**, **React
 
 ---
 
+## Screenshots
+
+| Sign In | Create Account |
+|:---:|:---:|
+| ![Sign in page](docs/screenshots/login.jpg) | ![Create account page](docs/screenshots/register.jpg) |
+
+---
+
 ## Tech Stack
 
-- **Backend:** Laravel 12, PHP 8.2+, Eloquent ORM
+- **Backend:** Laravel, PHP 8.2+, Eloquent ORM
 - **Frontend:** React 18, TypeScript, Inertia.js, Vite
-- **Styling:** Tailwind CSS, PostCSS
-- **Database:** PostgreSQL (with `pdo_pgsql` driver)
-- **Authentication:** Laravel Breeze (TypeScript + Inertia stack)
+- **Styling:** Tailwind CSS
+- **Database:** PostgreSQL
+- **Auth:** Laravel Breeze + Laravel Socialite (Google OAuth)
 
 ---
 
 ## Prerequisites
 
-Ensure the following tools are installed on your machine:
-
-| Tool | Version Requirement | Download Link |
+| Tool | Minimum Version | Download |
 | :--- | :--- | :--- |
-| **PHP** | `>= 8.2` (with `pdo_pgsql`, `openssl`, `mbstring`, `curl`) | [php.net](https://www.php.net/downloads) or via [Laragon](https://laragon.org/) |
+| **PHP** | `>= 8.2` with `pdo_pgsql`, `openssl`, `mbstring`, `curl` | [php.net](https://www.php.net/downloads) or [Laragon](https://laragon.org/) |
 | **Composer** | `>= 2.0` | [getcomposer.org](https://getcomposer.org/download/) |
-| **Node.js & npm** | Node `>= 18.0`, npm `>= 9.0` | [nodejs.org](https://nodejs.org/) |
+| **Node.js & npm** | Node `>= 18`, npm `>= 9` | [nodejs.org](https://nodejs.org/) |
 | **PostgreSQL** | `>= 14` | [postgresql.org](https://www.postgresql.org/download/) |
 | **Git** | Any modern version | [git-scm.com](https://git-scm.com/) |
 
-> **Note for Windows/Laragon users:** Ensure `extension=pdo_pgsql` and `extension=pgsql` are uncommented in your active `php.ini`.
+> **Windows / Laragon users:** Make sure `extension=pdo_pgsql` and `extension=pgsql` are uncommented in your active `php.ini`.
 
 ---
 
-## Quickstart Guide
+## Quickstart
 
-### 1. Clone the Repository
+### 1. Clone
 ```bash
-git clone <repository-url>
+git clone https://github.com/Tawfiq-Aziz/Pantry_Pilot.git
 cd Pantry_Pilot
 ```
 
-### 2. Install Dependencies
+### 2. Install dependencies
 ```bash
-# Install PHP dependencies
 composer install
-
-# Install JavaScript/TypeScript dependencies
 npm install
 ```
 
-### 3. Configure the Environment
+### 3. Environment setup
 ```bash
-# Create local environment configuration
 cp .env.example .env
-
-# Generate application key
 php artisan key:generate
 ```
 
-### 4. Configure PostgreSQL
-Create a database in PostgreSQL (e.g., using `psql`, pgAdmin, or your database GUI):
+### 4. Create the database
 ```sql
+-- In psql or pgAdmin
 CREATE DATABASE pantry_pilot;
 ```
 
-Update your `.env` database parameters:
+Then fill in your credentials in `.env`:
 ```env
 DB_CONNECTION=pgsql
 DB_HOST=127.0.0.1
 DB_PORT=5432
 DB_DATABASE=pantry_pilot
 DB_USERNAME=postgres
-DB_PASSWORD=your_postgres_password
+DB_PASSWORD=your_password
 ```
 
-### 5. Run Migrations
-Run the initial database migrations to create the required tables:
+### 5. Run migrations
 ```bash
 php artisan migrate
 ```
 
-### 6. Start the Application
-Run both backend and frontend development servers:
+### 6. (Optional) Google OAuth
 
-**Terminal 1 (Backend):**
+To enable "Continue with Google":
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com) → APIs & Services → Credentials
+2. Create an **OAuth 2.0 Client ID** (Web application)
+3. Add `http://localhost:8000/auth/google/callback` as an authorised redirect URI
+4. Copy the credentials into `.env`:
+
+```env
+GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your-client-secret
+GOOGLE_REDIRECT_URI=http://localhost:8000/auth/google/callback
+```
+
+5. Clear config cache:
+```bash
+php artisan config:clear
+```
+
+> Without these keys the Google button still works — it redirects back to the login page with an info message instead of crashing.
+
+### 7. Start the dev servers
+
+**Terminal 1 — backend:**
 ```bash
 php artisan serve
 ```
 
-**Terminal 2 (Frontend with Vite Hot-Reloading):**
+**Terminal 2 — frontend (HMR):**
 ```bash
 npm run dev
 ```
 
-Visit [`http://localhost:8000`](http://localhost:8000) in your browser.
+Open [http://localhost:8000](http://localhost:8000) — it lands directly on the login page.
 
 ---
 
-## Available Scripts
+## Available Commands
 
 | Command | Description |
 | :--- | :--- |
-| `npm run dev` | Starts the Vite development server with hot module replacement (HMR). |
-| `npm run build` | Compiles and optimizes TypeScript and CSS assets for production. |
-| `php artisan serve` | Starts the local PHP development server at `http://localhost:8000`. |
-| `php artisan migrate` | Executes pending database migrations against PostgreSQL. |
-| `php artisan test` | Runs the test suite via PHPUnit. |
+| `npm run dev` | Vite dev server with hot-module replacement |
+| `npm run build` | Production build (TypeScript + CSS) |
+| `php artisan serve` | Laravel dev server on `localhost:8000` |
+| `php artisan migrate` | Run pending database migrations |
+| `php artisan migrate:fresh` | Wipe and re-run all migrations |
+| `php artisan test` | Run PHPUnit test suite |
+| `php artisan route:list` | List all registered routes |
