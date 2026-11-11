@@ -54,14 +54,17 @@ export default function AuthLayout({
 
                     {/* Bottom Food Photography */}
                     <div className="relative mt-auto w-full overflow-hidden select-none">
-                        <img
-                            src="/images/auth-food.png"
-                            alt="Fresh organic mediterranean salad bowl in kitchen"
-                            className="w-full h-[280px] sm:h-[340px] lg:h-[410px] object-cover object-bottom"
-                            loading="eager"
-                        />
-                        {/* Subtle dark blend overlay on the top edge */}
-                        <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#1E211A] to-transparent pointer-events-none" />
+                        <picture>
+                            <source srcSet="/images/auth-food.webp" type="image/webp" />
+                            <img
+                                src="/images/auth-food.png"
+                                alt="Fresh organic mediterranean salad bowl in kitchen"
+                                className="w-full h-[320px] sm:h-[380px] lg:h-[420px] xl:h-[460px] object-cover object-center"
+                                loading="eager"
+                            />
+                        </picture>
+                        {/* Smooth dark atmospheric blend overlay on the top edge */}
+                        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#1E211A] via-[#1E211A]/60 to-transparent pointer-events-none" />
                     </div>
                 </aside>
 
