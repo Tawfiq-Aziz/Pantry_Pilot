@@ -123,9 +123,8 @@ export default function AuthLayout({
                             </div>
 
                             {/* Social Continue with Google */}
-                            <button
-                                type="button"
-                                onClick={() => alert('Google Social Sign-In integration is ready for OAuth credentials.')}
+                            <a
+                                href={route('auth.google')}
                                 className="w-full mt-5 bg-white hover:bg-stone-50 active:bg-stone-100 border border-stone-200/90 hover:border-stone-300 rounded-full py-2.5 px-4 flex items-center justify-center gap-2.5 shadow-[0_1px_2px_rgba(0,0,0,0.03)] text-xs sm:text-sm font-medium text-stone-800 transition-all cursor-pointer"
                             >
                                 <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
@@ -147,7 +146,7 @@ export default function AuthLayout({
                                     />
                                 </svg>
                                 <span>Continue with Google</span>
-                            </button>
+                            </a>
 
                             {/* Divider */}
                             <div className="relative my-5 flex items-center justify-center">
