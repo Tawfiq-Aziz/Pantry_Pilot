@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 // Redirect root to login; if already authenticated, middleware on login will send to dashboard
 Route::get('/', function () {
