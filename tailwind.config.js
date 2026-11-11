@@ -13,7 +13,18 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['"Plus Jakarta Sans"', 'Figtree', ...defaultTheme.fontFamily.sans],
+                serif: ['"Instrument Serif"', 'Georgia', ...defaultTheme.fontFamily.serif],
+            },
+            colors: {
+                pantry: {
+                    dark: '#1E211A',
+                    bg: '#F1EEE7',
+                    card: '#181C17',
+                    muted: '#9EA498',
+                    accent: '#3E4D38',
+                    pill: '#E5E1D7',
+                },
             },
         },
     },

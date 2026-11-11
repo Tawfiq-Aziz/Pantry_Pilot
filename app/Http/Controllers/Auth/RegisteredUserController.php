@@ -34,7 +34,11 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'string', Rules\Password::min(8)->numbers()],
+            'terms' => 'accepted',
+        ], [
+            'terms.accepted' => 'Please accept the Terms of Service and Privacy Policy to continue.',
+            'password.min' => 'Password must be at least 8 characters long.',
         ]);
 
         $user = User::create([
