@@ -77,7 +77,7 @@ DB_PASSWORD=your_password
 php artisan migrate
 ```
 
-### 6. (Optional) Google OAuth
+### 6. Google OAuth
 
 To enable "Continue with Google":
 
@@ -111,7 +111,7 @@ php artisan serve
 npm run dev
 ```
 
-Open [http://localhost:8000](http://localhost:8000) — it lands directly on the login page.
+Open [http://localhost:8000](http://localhost:8000) 
 
 ---
 
